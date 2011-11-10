@@ -17,15 +17,15 @@ module ApplicationHelper
     
     ## Mrunal will convert this to use reflection
     case l_user.role_id
-      when Role.student.id  
+      when Role::STUDENT  
         user = Student.new
-      when Role.ta.id
+      when Role::TA
         user = Ta.new 
-      when Role.instructor.id 
+      when Role::INSTRUCTOR 
         user = Instructor.new 
-      when Role.administrator.id
+      when Role::ADMINISTRATOR
         user = Administrator.new
-      when Role.superadministrator.id
+      when Role::SUPERADMINISTRATOR
         user = SuperAdministrator.new
     end
     user

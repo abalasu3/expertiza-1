@@ -35,6 +35,14 @@
 			</tr>
 			
 			<tr>
+			<td><label>Course:</label></td>
+			</td>
+			<td>
+			<%= select(:survey_deployment, :course_id, @course) %>
+			</td>
+			</tr>
+			
+			<tr>
 			<td><label>Use Random Subset:</label></td>
 			</td>
 			<td>
@@ -46,7 +54,7 @@
 			<td><label>Total number of students:</label></td>
 			</td>
 			<td>
-			<%= @total_students %>
+			<%= @total_students[0].count %>
 			</td>
 			</tr>
 			

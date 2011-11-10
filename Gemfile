@@ -6,18 +6,17 @@ gem 'fastercsv'
 gem 'gdata', :require => false
 gem 'hoptoad_notifier'
 gem 'mysql'
-gem 'rdoc'
 gem 'rails', '~> 2.3.14'
 gem 'RedCloth'
-gem 'rake'
 gem 'rgl', :require => 'rgl/adjacency'
 gem 'rubyzip', :require => 'zip/zip'
-gem 'rdoc'
-gem "rspec-rails", "1.3.2"
 
 group :development do
   gem 'mongrel'
   gem 'ruby-debug'
+  gem 'rdoc'
+  #gem 'ruby-debug19'
+  #gem 'eventmachine'
 end
 
 group :test do
@@ -25,5 +24,4 @@ group :test do
   gem 'cucumber-rails', '0.3.2', :require => false
   gem 'capybara', '0.3.9'
   gem 'database_cleaner', '>=0.5.0', :require => false
-  gem 'launchy', '0.4.0'
 end

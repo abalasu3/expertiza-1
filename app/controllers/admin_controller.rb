@@ -16,7 +16,7 @@ class AdminController < ApplicationController
   end
 
   def search_instructor
-    @results = search_users(Role.instructor.id)
+    @results = search_users(Role::INSTRUCTOR)
   end
 
   def new_instructor
@@ -32,20 +32,20 @@ class AdminController < ApplicationController
       @found = true
     end
     @user.name = params[:name]
-    @user.role_id = Role.instructor.id
+    @user.role_id = Role::INSTRUCTOR
   end
 
   def create_instructor
     if params['save']
       @user = User.find_by_name((params[:user])[:name])
-      @user.role_id = Role.instructor.id
+      @user.role_id = Role::INSTRUCTOR
       @user.update_attributes(params[:user])
       redirect_to :action => 'list_instructors'
     else
     
       @user = User.new(params[:user])
       @user.parent_id = (session[:user]).id
-      @user.role_id = Role.instructor.id
+      @user.role_id = Role::INSTRUCTOR
       #@user.mru_directory_path = "/"
     
       if @user.save
@@ -64,11 +64,11 @@ class AdminController < ApplicationController
   
   def list_instructors
    user_id = session[:user].id
-   @users = User.paginate(:page => params[:page], :order => 'name',:conditions => ["parent_id = ? AND role_id = ?", user_id, Role.instructor.id], :per_page => 50)
+   @users = User.paginate(:page => params[:page], :order => 'name',:conditions => ["parent_id = ? AND role_id = ?", user_id, Role::INSTRUCTOR], :per_page => 50)
   end
 
   def search_administrator
-    @results = search_users(Role.administrator.id)
+    @results = search_users(Role::ADMINISTRATOR)
   end
 
   def add_administrator
@@ -76,12 +76,12 @@ class AdminController < ApplicationController
   end
 
   def save_administrator # saves newly created administrator to database
-    PgUsersController.create(Role.administrator.id,:admin_controller,:list_administrators,:add_administrator)
+    PgUsersController.create(Role::ADMINISTRATOR,:admin_controller,:list_administrators,:add_administrator)
   end
 
   def list_administrators    
     user_id = session[:user].id    
-    @users = User.paginate(:page => params[:page], :order => 'name',:conditions => ["parent_id = ? AND role_id = ?", user_id, Role.administrator.id], :per_page => 50)
+    @users = User.paginate(:page => params[:page], :order => 'name',:conditions => ["parent_id = ? AND role_id = ?", user_id, Role::ADMINISTRATOR], :per_page => 50)
   end
    
   def list_users(conditions)
@@ -89,7 +89,7 @@ class AdminController < ApplicationController
   end
 
   def search_super_administrator
-    @results = search_users(Role.superadministrator.id)
+    @results = search_users(Role::SUPERADMINISTRATOR)
   end
 
   def add_super_administrator
@@ -111,10 +111,10 @@ class AdminController < ApplicationController
   end
 
   def save_super_administrator # saves newly created administrator to database
-    PgUsersController.create(Role.superadministrator.id,:admin_controller,:list_super_administrators,:add_super_administrator)
+    PgUsersController.create(Role::SUPERADMINISTRATOR,:admin_controller,:list_super_administrators,:add_super_administrator)
   end
 
   def list_super_administrators
-    @users = User.find(:all, :conditions => ["role_id = ?", Role.superadministrator.id])
+    @users = User.find(:all, :conditions => ["role_id = ?", Role::SUPERADMINISTRATOR])
   end
 end
